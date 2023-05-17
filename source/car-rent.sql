@@ -18,7 +18,7 @@
 --
 -- DataBase
 --
-CREATE DATABASE IF EXISTS `car-rent`;
+CREATE DATABASE IF NOT EXISTS `car-rent`;
 USE `car-rent`;
 
 --
