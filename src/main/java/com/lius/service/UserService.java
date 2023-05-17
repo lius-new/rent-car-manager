@@ -20,4 +20,6 @@ public interface UserService {
 
     User login(User user);
 
+    User register(User user);
+
 }

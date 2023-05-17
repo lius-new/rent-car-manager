@@ -4,11 +4,10 @@ import com.lius.common.Result;
 import com.lius.common.Utils;
 import com.lius.entity.User;
 import com.lius.service.UserService;
-import org.apache.ibatis.jdbc.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
+import java.util.HashMap;
 
 @RestController
 @RequestMapping("/user")
@@ -43,18 +42,26 @@ public class UserController {
     }
 
 
-    @PostMapping("/login")
-    public Result login(@RequestBody User user) {
+    @GetMapping("/login")
+    public Result<Object> login(@RequestBody User user) {
         User u = userService.login(user);
+        System.out.println(u);
 
-        if (u == null) return new Result<Null>(false, "登录失败");
+        if (u == null) return new Result<Object>(false, "登录失败");
 
-        String s = Utils.generateToken(user);
-        System.out.println("token: " + s);
-
-        //https://juejin.cn/post/6985828884818165797
-        Utils.parseToken(s);
-
-        return new Result<Null>(true, "登录成功");
+        HashMap<String, Object> resultMap = new HashMap<>();
+        resultMap.put("token", Utils.generateToken(user));
+        return new Result<Object>(true, "登录成功", resultMap);
     }
+
+    @PostMapping("/register")
+    public Result<Object> register(@RequestBody User user) {
+        User register = userService.register(user);
+        if (register == null) return new Result<Object>(false, "注册失败");
+
+        HashMap<String, Object> resultMap = new HashMap<>();
+        resultMap.put("token", Utils.generateToken(user));
+        return new Result<Object>(true, "注册成功", resultMap);
+    }
+
 }

@@ -43,4 +43,24 @@ public class Utils {
         System.out.println("过期时间:" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").
                 format(claims.getExpiration()));
     }
+
+    /**
+     * 将user_name的形式转换为驼峰命名的形式, 如果没有_，即会直接返回
+     */
+    public static String mapUnderscoreToCamelCase(String str) {
+        int i = str.indexOf('_');
+
+        if (i == -1) {
+            return str;
+        } else {
+            String[] split = str.split("_");
+            StringBuilder col = new StringBuilder(split[0]);
+            for (int j = 1; j < split.length; j++) {
+                char[] chars = split[j].toCharArray();
+                chars[0] = String.valueOf(chars[0]).toUpperCase().toCharArray()[0];
+                col.append(String.valueOf(chars));
+            }
+            return col.toString();
+        }
+    }
 }
