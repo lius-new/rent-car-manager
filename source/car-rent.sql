@@ -16,6 +16,12 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- DataBase
+--
+CREATE DATABASE IF EXISTS `car-rent`;
+USE `car-rent`;
+
+--
 -- Table structure for table `car`
 --
 

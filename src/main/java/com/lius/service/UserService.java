@@ -1,5 +1,8 @@
 package com.lius.service;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.util.PageObjectUtil;
+import com.lius.common.Result;
 import com.lius.entity.User;
 
 import java.util.List;
@@ -14,5 +17,7 @@ public interface UserService {
     List<User> selectAllUser();
 
     User selectUserByUserName(String username);
+
+    User login(User user);
 
 }

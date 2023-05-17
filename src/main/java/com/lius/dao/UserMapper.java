@@ -19,6 +19,9 @@ public interface UserMapper {
     @Select("select * from user")
     List<User> selectAllUser();
 
-    @Select("select * from user where user_name = #{user_name}")
+    @Select("select * from user where user_name like CONCAT('%', #{user_name},'%')")
     User selectUserByUserName(@Param("user_name") String username);
+
+    @Select("select * from user where user_name=#{userName} and user_password=#{userPassword} and user_status!='1'")
+    User login(User user);
 }
