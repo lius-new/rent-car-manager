@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <!--大小写转换-->
+        <setting name="mapUnderscoreToCamelCase" value="true" />
+        <!--aggressiveLazyLoading：侵入延迟加载，当使用任一属性，所有的属性都会加载；禁用的话，只有用到该属性才会加载，即按需加载-->
+        <setting name="aggressiveLazyLoading" value="false"/>
+    </settings>
+</configuration>
