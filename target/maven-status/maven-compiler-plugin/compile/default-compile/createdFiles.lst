@@ -1,6 +1,0 @@
-com/lius/service/UserService.class
-com/lius/entity/User.class
-com/lius/entity/Car.class
-com/lius/dao/UserMapper.class
-com/lius/service/impl/UserServiceImpl.class
-com/lius/controller/TestController.class
