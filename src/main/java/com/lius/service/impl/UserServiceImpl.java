@@ -40,6 +40,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<User> selectUserByUserNameLike(String username) {
+        return userMapper.selectUserByUserNameLike(username);
+    }
+
+    @Override
     public User login(User user) {
         return userMapper.login(user);
     }
@@ -47,6 +52,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public User register(User user) {
         int i = userMapper.insertUser(user);
-        return i > 0 ? user : null;
+        // 注册成功，返回数据库中的数据，否则返回null
+        return i > 0 ? userMapper.selectUserByUserName(user.getUserName()) : null;
+    }
+
+    @Override
+    public boolean checkLogin(User user) {
+        List<User> users = userMapper.checkUser(user);
+        return users.size() == 1;
     }
 }

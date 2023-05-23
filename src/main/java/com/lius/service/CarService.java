@@ -1,6 +1,7 @@
 package com.lius.service;
 
 import com.lius.entity.Car;
+import com.lius.entity.CarShow;
 import com.lius.entity.User;
 import org.apache.ibatis.annotations.*;
 
@@ -12,9 +13,11 @@ public interface CarService {
 
     int updateCar(Car car);
 
-    User deleteCarById(int id);
+    int deleteCarById(int id);
 
-    List<User> selectAllCar();
+    List<CarShow> selectAllCar();
 
-    User selectCarByCarName( String username);
+    List<CarShow> selectCarByUser(String userName);
+
+    Car selectCarByCarName(String carName);
 }

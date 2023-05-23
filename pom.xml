@@ -21,6 +21,12 @@
             <version>4.13.2</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+            <scope>provided</scope>
+        </dependency>
         <!--spring mvc核心: 其中包括了spring所需的各类dependency-->
         <dependency>
             <groupId>org.springframework</groupId>

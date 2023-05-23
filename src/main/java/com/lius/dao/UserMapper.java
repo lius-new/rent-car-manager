@@ -7,7 +7,9 @@ import java.util.List;
 
 @Mapper
 public interface UserMapper {
-    @Insert("insert into user(user_name,user_password,user_email,user_role,user_status) values(#{userName},#{userPassword},#{userEmail},#{userRole},#{userStatus})")
+
+    // TODO: 默认userRole=USER,userStatus=0
+    @Insert("insert into user(user_name,user_password,user_email,user_role,user_status) values(#{userName},#{userPassword},#{userEmail},'USER',0)")
     int insertUser(User user);
 
     @Update("update user set user_name=#{userName},user_password=#{userPassword},user_email=#{userEmail},user_role=#{userRole},user_status=#{userStatus} where id = #{id}")
@@ -20,10 +22,14 @@ public interface UserMapper {
     List<User> selectAllUser();
 
     @Select("select * from user where user_name like CONCAT('%', #{user_name},'%')")
+    List<User> selectUserByUserNameLike(@Param("user_name") String username);
+
+    @Select("select * from user where user_name=#{user_name}")
     User selectUserByUserName(@Param("user_name") String username);
 
-    @Select("select * from user where user_name=#{userName} and user_password=#{userPassword} and user_status!='1'")
+    @Select("select * from user where user_name=#{userName} and user_password=#{userPassword}")
     User login(User user);
 
-
+    @Select("select * from user where user_name=#{userName} and id=#{id} and user_role=#{userRole} and user_status!=1")
+    List<User> checkUser(User user);
 }

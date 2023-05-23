@@ -2,6 +2,7 @@ package com.lius.service.impl;
 
 import com.lius.dao.CarMapper;
 import com.lius.entity.Car;
+import com.lius.entity.CarShow;
 import com.lius.entity.User;
 import com.lius.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,26 +18,31 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public int insertCar(Car car) {
-        return 0;
+        return carMapper.insertCar(car);
     }
 
     @Override
     public int updateCar(Car car) {
-        return 0;
+        return carMapper.updateCar(car);
     }
 
     @Override
-    public User deleteCarById(int id) {
-        return null;
+    public int deleteCarById(int id) {
+        return carMapper.deleteCarById(id);
     }
 
     @Override
-    public List<User> selectAllCar() {
-        return null;
+    public List<CarShow> selectAllCar() {
+        return carMapper.selectAllCar();
     }
 
     @Override
-    public User selectCarByCarName(String username) {
-        return null;
+    public List<CarShow> selectCarByUser(String userName) {
+        return carMapper.selectCarByUser(userName);
+    }
+
+    @Override
+    public Car selectCarByCarName(String carName) {
+        return carMapper.selectCarByCarName(carName);
     }
 }

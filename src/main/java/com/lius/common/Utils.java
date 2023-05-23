@@ -1,5 +1,6 @@
 package com.lius.common;
 
+import com.lius.controller.ExceptionAdvice;
 import com.lius.entity.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
@@ -20,28 +21,34 @@ public class Utils {
      * @return token
      */
     public static String generateToken(User user) {
-        JwtBuilder jwtBuilder = Jwts.builder()
-                .setId(user.getId() + "") // 用户id
-                .setSubject(user.getUserName()) // 用户名
-                .setIssuedAt(new Date()) // 登录时间
-                .signWith(SignatureAlgorithm.HS256, signKey)
+        Claims claims = Jwts.claims()
+                .setId(user.getId() + "")
+                .setSubject(user.getUserName())
+                .setIssuedAt(new Date())
                 .setExpiration(new Date(new Date().getTime() + 86400000)); // 过期时间
 
-        return jwtBuilder.compact();
+        claims.put("role", user.getUserRole()); // 添加role
+
+        return Jwts.builder()
+                .setClaims(claims)
+                .signWith(SignatureAlgorithm.HS256, signKey)
+                .compact();
     }
 
-    public static void parseToken(String token) {
+    public static User parseToken(String token) throws ExceptionAdvice.CheckTokenException {
         Claims claims = Jwts.parser()
                 .setSigningKey(signKey)
                 .parseClaimsJws(token)
                 .getBody();
 
-        System.out.println("用户id:" + claims.getId());
-        System.out.println("用户名:" + claims.getSubject());
-        System.out.println("登录时间:" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").
-                format(claims.getIssuedAt()));
-        System.out.println("过期时间:" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").
-                format(claims.getExpiration()));
+        String id = claims.getId();
+        String userName = claims.getSubject();
+        String userRole = (String) claims.get("role");
+
+        // (id,userName,userROle)获取不到直接抛出错误
+        if (id.equals("null") || userName.equals("null") || userRole.equals("null"))
+            throw new ExceptionAdvice.CheckTokenException();
+        return new User(Integer.valueOf(id), userName, userRole);
     }
 
     /**

@@ -18,8 +18,12 @@ public interface UserService {
 
     User selectUserByUserName(String username);
 
+    List<User>  selectUserByUserNameLike(String username);
+
     User login(User user);
 
     User register(User user);
+
+    boolean checkLogin(User user);
 
 }

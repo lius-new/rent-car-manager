@@ -18,3 +18,6 @@ Content-Type: application/json
   "userRole": "USER",
   "userStatus": 0
 }
+
+### 获取所有车辆
+GET http://127.0.0.1:8080/car

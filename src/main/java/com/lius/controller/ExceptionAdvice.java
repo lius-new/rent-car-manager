@@ -1,8 +1,9 @@
 package com.lius.controller;
 
 import com.lius.common.Result;
+import com.lius.common.ResultCode;
 import com.lius.common.Utils;
-import org.springframework.web.bind.annotation.ControllerAdvice;
+import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -10,6 +11,13 @@ import java.sql.SQLIntegrityConstraintViolationException;
 
 @RestControllerAdvice
 public class ExceptionAdvice {
+
+    public static class CheckTokenException extends Exception {
+        @Override
+        public String getMessage() {
+            return "token 校验失败";
+        }
+    }
 
     /**
      * java.sql.SQLIntegrityConstraintViolationException: Duplicate entry 'admin@admin.com' for key 'user_email'
@@ -24,12 +32,26 @@ public class ExceptionAdvice {
         String message = exception.getMessage();
 
         if (!message.contains("key")) {
-            return new Result<>(false, exception.getMessage());
+            return new Result<>(false, ResultCode.DATABASE_COL_ERROR.getCode(), exception.getMessage());
         } else {
             // 获取到致使报错的column
             String key = message.substring(message.indexOf("key") + 3).trim();
             // 判断是否有_,如果没有就直接返回key,如果有就将字段变为驼峰命名法的字段表示
-            return new Result<Object>(false, exception.getMessage(), Utils.mapUnderscoreToCamelCase(key));
+            return new Result<Object>(false, ResultCode.DATABASE_COL_ERROR.getCode(), exception.getMessage(), Utils.mapUnderscoreToCamelCase(key));
+        }
+    }
+
+    @ExceptionHandler(CheckTokenException.class)
+    public Result<Object> doCheckTokenException(CheckTokenException exception) {
+        return new Result<>(false, ResultCode.CHECK_TOKEN_FAIL.getCode(), exception.getMessage());
+    }
+
+    @ExceptionHandler(ExpiredJwtException.class) // token过期错误
+    public Result<Object> doTokenExpired(ExpiredJwtException exception) {
+        if (exception.getMessage().contains("JWT expired at")) {
+            return new Result<>(false, ResultCode.CHECK_TOKEN_EXPIRED_SUCCESS.getCode(), ResultCode.CHECK_TOKEN_EXPIRED_SUCCESS.getMsg());
+        } else {
+            return new Result<>(false, ResultCode.CHECK_TOKEN_FAIL.getCode(), exception.getMessage());
         }
     }
 }

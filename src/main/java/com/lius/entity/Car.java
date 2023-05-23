@@ -8,6 +8,8 @@ public class Car {
     private String carContent;
     private Integer carStatus;
 
+    private Integer rentId;
+
     public Integer getId() {
         return id;
     }
@@ -56,16 +58,11 @@ public class Car {
         this.carStatus = carStatus;
     }
 
-    @Override
-    public String
-    toString() {
-        return "Car{" +
-                "id=" + id +
-                ", carName='" + carName + '\'' +
-                ", carUserId='" + carUserId + '\'' +
-                ", carDesc='" + carDesc + '\'' +
-                ", carContent='" + carContent + '\'' +
-                ", carStatus=" + carStatus +
-                '}';
+    public Integer getRentId() {
+        return rentId;
+    }
+
+    public void setRentId(Integer rentId) {
+        this.rentId = rentId;
     }
 }

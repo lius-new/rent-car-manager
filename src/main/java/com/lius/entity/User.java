@@ -8,6 +8,16 @@ public class User {
     private String userRole;
     private Integer userStatus;
 
+    public User() {
+    }
+
+    public User(Integer id, String userName,String userRole) {
+        this.id = id;
+        this.userName = userName;
+        this.userRole = userRole;
+    }
+
+
     public Integer getId() {
         return id;
     }

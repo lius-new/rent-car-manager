@@ -4,17 +4,21 @@ import java.io.Serializable;
 
 public class Result<T> implements Serializable {
     private boolean success;
+
+    private Integer code;
     private String msg;
 
     private T data;
 
-    public Result(boolean success, String msg) {
+    public Result(boolean success, Integer code, String msg) {
         this.success = success;
+        this.code = code;
         this.msg = msg;
     }
 
-    public Result(boolean success, String msg, T data) {
+    public Result(boolean success, Integer code, String msg, T data) {
         this.success = success;
+        this.code = code;
         this.msg = msg;
         this.data = data;
     }
@@ -25,6 +29,14 @@ public class Result<T> implements Serializable {
 
     public void setSuccess(boolean success) {
         this.success = success;
+    }
+
+    public Integer getCode() {
+        return code;
+    }
+
+    public void setCode(Integer code) {
+        this.code = code;
     }
 
     public String getMsg() {
@@ -41,14 +53,5 @@ public class Result<T> implements Serializable {
 
     public void setData(T data) {
         this.data = data;
-    }
-
-    @Override
-    public String toString() {
-        return "Result{" +
-                "success=" + success +
-                ", msg='" + msg + '\'' +
-                ", data=" + data +
-                '}';
     }
 }

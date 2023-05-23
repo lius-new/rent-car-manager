@@ -1,13 +1,16 @@
 package com.lius.controller;
 
 import com.lius.common.Result;
+import com.lius.common.ResultCode;
 import com.lius.common.Utils;
 import com.lius.entity.User;
 import com.lius.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
+import java.util.List;
 
 @RestController
 @RequestMapping("/user")
@@ -32,36 +35,61 @@ public class UserController {
     }
 
     @GetMapping()
-    public void selectAllUser() {
-        System.out.println(userService.selectAllUser());
+    public Result<Object> selectAllUser() {
+        return new Result<>(true, ResultCode.DATABASE_OPERATE_SUCCESS.getCode(), ResultCode.DATABASE_OPERATE_SUCCESS.getMsg(), userService.selectAllUser());
     }
 
     @GetMapping("/{userName}")
-    public void selectUserByUserName(@PathVariable(value = "userName", required = true) String userName) {
-        System.out.println(userService.selectUserByUserName(userName));
+    public Result<Object> selectUserByUserName(@PathVariable(value = "userName", required = true) String userName) {
+        User user = userService.selectUserByUserName(userName);
+        return new Result<>(true, ResultCode.DATABASE_OPERATE_SUCCESS.getCode(), ResultCode.DATABASE_OPERATE_SUCCESS.getMsg(), user);
     }
 
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     public Result<Object> login(@RequestBody User user) {
         User u = userService.login(user);
-        System.out.println(u);
 
-        if (u == null) return new Result<Object>(false, "登录失败");
+        if (u == null)
+            return new Result<Object>(false, ResultCode.LOGIN_FAIL.getCode(), ResultCode.LOGIN_FAIL.getMsg());
+        if (u.getUserStatus() == 1) {
+            return new Result<Object>(false, ResultCode.LOGIN_FAIL_STATUS_ERROR.getCode(), ResultCode.LOGIN_FAIL_STATUS_ERROR.getMsg());
+        }
 
         HashMap<String, Object> resultMap = new HashMap<>();
-        resultMap.put("token", Utils.generateToken(user));
-        return new Result<Object>(true, "登录成功", resultMap);
+        resultMap.put("token", Utils.generateToken(u));
+        resultMap.put("role", u.getUserRole());
+        return new Result<Object>(true, ResultCode.LOGIN_SUCCESS.getCode(), ResultCode.LOGIN_SUCCESS.getMsg(), resultMap);
     }
 
     @PostMapping("/register")
     public Result<Object> register(@RequestBody User user) {
         User register = userService.register(user);
-        if (register == null) return new Result<Object>(false, "注册失败");
+        // 返回register
+        if (register == null)
+            return new Result<Object>(false, ResultCode.REGISTER_FAIL.getCode(), ResultCode.REGISTER_FAIL.getMsg());
 
         HashMap<String, Object> resultMap = new HashMap<>();
-        resultMap.put("token", Utils.generateToken(user));
-        return new Result<Object>(true, "注册成功", resultMap);
+        resultMap.put("token", Utils.generateToken(register));
+        resultMap.put("role", register.getUserRole());
+        return new Result<Object>(true, ResultCode.REGISTER_SUCCESS.getCode(), ResultCode.REGISTER_SUCCESS.getMsg(), resultMap);
+    }
+
+    @GetMapping("/authLogin")
+    public Result<Object> authLogin(HttpServletRequest request, @RequestParam(value = "userRole") String userRole) throws ExceptionAdvice.CheckTokenException {
+        String token = request.getHeader("Authorization");
+        if (token == null)
+            return new Result<>(true, ResultCode.LOGIN_DEAD_STATUS.getCode(), ResultCode.LOGIN_DEAD_STATUS.getMsg());
+        User user = Utils.parseToken(token);
+        if (!user.getUserRole().equals(userRole)) { // 比较token中和localStorage中的userRole,如果权限被篡改了，那么就返回到未登录状态
+            return new Result<>(true, ResultCode.LOGIN_DEAD_STATUS.getCode(), ResultCode.LOGIN_DEAD_STATUS.getMsg());
+        }
+        boolean b = userService.checkLogin(user); // true: 登录, false: 未登录
+        if (b) {
+            return new Result<>(true, ResultCode.LOGIN_ACTIVE_STATUS.getCode(), ResultCode.LOGIN_ACTIVE_STATUS.getMsg());
+        } else {
+            return new Result<>(true, ResultCode.LOGIN_DEAD_STATUS.getCode(), ResultCode.LOGIN_DEAD_STATUS.getMsg());
+        }
     }
 
 }

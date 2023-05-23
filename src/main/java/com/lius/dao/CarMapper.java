@@ -1,6 +1,7 @@
 package com.lius.dao;
 
 import com.lius.entity.Car;
+import com.lius.entity.CarShow;
 import com.lius.entity.User;
 import org.apache.ibatis.annotations.*;
 
@@ -15,11 +16,25 @@ public interface CarMapper {
     int updateCar(Car car);
 
     @Delete("delete from car where id = #{id}")
-    User deleteCarById(int id);
+    int deleteCarById(int id);
 
-    @Select("select * from car")
-    List<User> selectAllCar();
+    @Select("select car.id,user_name,car_name,car_desc,car_status,rent_id from car,user where car.car_user_id=user.id;")
+    @Results(id = "userMap",value = {
+            @Result(id = true,column = "id",property = "id"),
+            @Result(column = "user_name",property = "userName"),
+            @Result(column = "car_name",property = "carName"),
+            @Result(column = "car_desc",property = "carDesc"),
+            @Result(column = "car_status",property = "carStatus"),
+            @Result(column = "rent_id",property = "rentId"),
+    })
+    List<CarShow> selectAllCar();
 
-    @Select("select * from car where car_name like CONCAT('%', #{username},'%')")
-    User selectCarByCarName(@Param("user_name") String username);
+    @Select("select * from car where car_name like CONCAT('%', #{carName},'%')")
+    Car selectCarByCarName(@Param("carName") String carName);
+
+    @Select("select car.id,user_name,car_name,car_desc,car_status,rent_id from car,user where car.car_user_id=user.id and user_name=#{userName}")
+    @ResultMap("userMap")
+    List<CarShow> selectCarByUser(@Param("userName") String userName);
+
+
 }
