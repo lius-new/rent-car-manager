@@ -61,4 +61,9 @@ public class UserServiceImpl implements UserService {
         List<User> users = userMapper.checkUser(user);
         return users.size() == 1;
     }
+
+    @Override
+    public int changeUserRole(User user) {
+        return userMapper.changeUserRole(user);
+    }
 }

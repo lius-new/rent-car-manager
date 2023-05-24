@@ -1,8 +1,5 @@
 package com.lius.service;
 
-import com.github.pagehelper.Page;
-import com.github.pagehelper.util.PageObjectUtil;
-import com.lius.common.Result;
 import com.lius.entity.User;
 
 import java.util.List;
@@ -25,5 +22,7 @@ public interface UserService {
     User register(User user);
 
     boolean checkLogin(User user);
+
+    int changeUserRole(User user);
 
 }

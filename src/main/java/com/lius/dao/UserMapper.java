@@ -15,6 +15,9 @@ public interface UserMapper {
     @Update("update user set user_name=#{userName},user_password=#{userPassword},user_email=#{userEmail},user_role=#{userRole},user_status=#{userStatus} where id = #{id}")
     int updateUser(User user);
 
+    @Update("update user set user_role=#{userRole} where id = #{id}")
+    int changeUserRole(User user);
+
     @Delete("delete from user where id = #{id}")
     User deleteUserById(int id);
 
@@ -32,4 +35,5 @@ public interface UserMapper {
 
     @Select("select * from user where user_name=#{userName} and id=#{id} and user_role=#{userRole} and user_status!=1")
     List<User> checkUser(User user);
+
 }

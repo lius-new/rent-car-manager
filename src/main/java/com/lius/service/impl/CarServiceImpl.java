@@ -3,6 +3,7 @@ package com.lius.service.impl;
 import com.lius.dao.CarMapper;
 import com.lius.entity.Car;
 import com.lius.entity.CarShow;
+import com.lius.entity.Temp;
 import com.lius.entity.User;
 import com.lius.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,5 +45,12 @@ public class CarServiceImpl implements CarService {
     @Override
     public Car selectCarByCarName(String carName) {
         return carMapper.selectCarByCarName(carName);
+    }
+
+    @Override
+    public List<Temp> selectAllCarV2() {
+        List<Temp> temps = carMapper.selectAllCarV2();
+        System.out.println(temps);
+        return   temps;
     }
 }

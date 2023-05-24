@@ -3,9 +3,12 @@ package com.lius.controller;
 import com.lius.common.Result;
 import com.lius.common.ResultCode;
 import com.lius.entity.Car;
+import com.lius.entity.Temp;
 import com.lius.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/car")
@@ -42,5 +45,11 @@ public class CarController {
     @GetMapping("/{carName}")
     public Car selectCarByCarName(@PathVariable("carName") String carName) {
         return carService.selectCarByCarName(carName);
+    }
+
+    @GetMapping("/test")
+    public List<Temp> test(){
+        System.out.println("hello world");
+        return carService.selectAllCarV2();
     }
 }

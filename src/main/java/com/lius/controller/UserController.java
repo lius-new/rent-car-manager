@@ -36,7 +36,8 @@ public class UserController {
 
     @GetMapping()
     public Result<Object> selectAllUser() {
-        return new Result<>(true, ResultCode.DATABASE_OPERATE_SUCCESS.getCode(), ResultCode.DATABASE_OPERATE_SUCCESS.getMsg(), userService.selectAllUser());
+        List<User> users = userService.selectAllUser();
+        return new Result<>(true, ResultCode.DATABASE_OPERATE_SUCCESS.getCode(), ResultCode.DATABASE_OPERATE_SUCCESS.getMsg(), users);
     }
 
     @GetMapping("/{userName}")
@@ -90,6 +91,17 @@ public class UserController {
         } else {
             return new Result<>(true, ResultCode.LOGIN_DEAD_STATUS.getCode(), ResultCode.LOGIN_DEAD_STATUS.getMsg());
         }
+    }
+
+    @GetMapping("/change-user-role")
+    public Result<Object> changeUserRole(@RequestBody User user) {
+        //  user 中的id和role不可以为空
+        int i = userService.changeUserRole(user);
+
+        if (i > 0) {
+            return new Result<>(true, ResultCode.DATABASE_OPERATE_SUCCESS.getCode(), "升级成功");
+        }
+        return new Result<>(true, ResultCode.DATABASE_OPERATE_FAIL.getCode(), "升级失败");
     }
 
 }

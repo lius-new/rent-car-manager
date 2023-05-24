@@ -2,6 +2,7 @@ package com.lius.service;
 
 import com.lius.entity.Car;
 import com.lius.entity.CarShow;
+import com.lius.entity.Temp;
 import com.lius.entity.User;
 import org.apache.ibatis.annotations.*;
 
@@ -20,4 +21,7 @@ public interface CarService {
     List<CarShow> selectCarByUser(String userName);
 
     Car selectCarByCarName(String carName);
+
+
+    List<Temp> selectAllCarV2();
 }
