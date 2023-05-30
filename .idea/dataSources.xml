@@ -8,5 +8,12 @@
       <jdbc-url>jdbc:mysql://192.168.236.111:3306/car-rent</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="join_test@192.168.236.111" uuid="d0befe8b-4ccd-4db8-9059-306b0d319b62">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://192.168.236.111:3306/join_test</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

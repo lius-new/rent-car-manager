@@ -18,11 +18,14 @@ public interface UserMapper {
     @Update("update user set user_role=#{userRole} where id = #{id}")
     int changeUserRole(User user);
 
-    @Delete("delete from user where id = #{id}")
-    User deleteUserById(int id);
+    @Delete("delete from user where user_name=#{userName}")
+    int deleteUserByUserName(String userName);
 
     @Select("select * from user")
     List<User> selectAllUser();
+
+    @Select("select * from user where user_name=#{username}")
+    User selectIdByUserName(String username);
 
     @Select("select * from user where user_name like CONCAT('%', #{user_name},'%')")
     List<User> selectUserByUserNameLike(@Param("user_name") String username);

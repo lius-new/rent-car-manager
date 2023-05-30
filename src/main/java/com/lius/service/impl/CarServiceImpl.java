@@ -2,9 +2,6 @@ package com.lius.service.impl;
 
 import com.lius.dao.CarMapper;
 import com.lius.entity.Car;
-import com.lius.entity.CarShow;
-import com.lius.entity.Temp;
-import com.lius.entity.User;
 import com.lius.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,17 +25,32 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public int deleteCarById(int id) {
+    public int updateCarAll(Car car) {
+        return carMapper.updateCarAll(car);
+    }
+
+    @Override
+    public int deleteCarById(String id) {
         return carMapper.deleteCarById(id);
     }
 
     @Override
-    public List<CarShow> selectAllCar() {
+    public List<Car> selectAllCar() {
         return carMapper.selectAllCar();
     }
 
     @Override
-    public List<CarShow> selectCarByUser(String userName) {
+    public List<Car> selectRentCar() {
+        return carMapper.selectRentCar();
+    }
+
+    @Override
+    public List<Car> selectAllCarAndUserAndRent() {
+        return carMapper.selectAllCarAndUserAndRent();
+    }
+
+    @Override
+    public List<Car> selectCarByUser(String userName) {
         return carMapper.selectCarByUser(userName);
     }
 
@@ -48,9 +60,9 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public List<Temp> selectAllCarV2() {
-        List<Temp> temps = carMapper.selectAllCarV2();
-        System.out.println(temps);
-        return   temps;
+    public int updateCarRentId(Integer rentId, Integer id) {
+        return carMapper.updateCarRentId(rentId, id);
     }
+
+
 }

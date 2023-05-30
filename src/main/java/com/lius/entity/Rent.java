@@ -4,10 +4,20 @@ import java.util.Date;
 
 public class Rent {
     private Integer id;
-    private Integer rent_user_id;
-    private Integer rent_car_id;
-    private Date rent_start_date;
-    private Date rent_end_date;
+    private Integer rentUserId;
+    private Integer rentCarId;
+    private Date rentStartDate;
+    private Date rentEndDate;
+
+    public Rent() {
+    }
+
+    public Rent(Integer rentUserId, Integer rentCarId, Date rentStartDate, Date rentEndDate) {
+        this.rentUserId = rentUserId;
+        this.rentCarId = rentCarId;
+        this.rentStartDate = rentStartDate;
+        this.rentEndDate = rentEndDate;
+    }
 
     public Integer getId() {
         return id;
@@ -17,46 +27,46 @@ public class Rent {
         this.id = id;
     }
 
-    public Integer getRent_user_id() {
-        return rent_user_id;
+    public Integer getRentUserId() {
+        return rentUserId;
     }
 
-    public void setRent_user_id(Integer rent_user_id) {
-        this.rent_user_id = rent_user_id;
+    public void setRentUserId(Integer rentUserId) {
+        this.rentUserId = rentUserId;
     }
 
-    public Integer getRent_car_id() {
-        return rent_car_id;
+    public Integer getRentCarId() {
+        return rentCarId;
     }
 
-    public void setRent_car_id(Integer rent_car_id) {
-        this.rent_car_id = rent_car_id;
+    public void setRentCarId(Integer rentCarId) {
+        this.rentCarId = rentCarId;
     }
 
-    public Date getRent_start_date() {
-        return rent_start_date;
+    public Date getRentStartDate() {
+        return rentStartDate;
     }
 
-    public void setRent_start_date(Date rent_start_date) {
-        this.rent_start_date = rent_start_date;
+    public void setRentStartDate(Date rentStartDate) {
+        this.rentStartDate = rentStartDate;
     }
 
-    public Date getRent_end_date() {
-        return rent_end_date;
+    public Date getRentEndDate() {
+        return rentEndDate;
     }
 
-    public void setRent_end_date(Date rent_end_date) {
-        this.rent_end_date = rent_end_date;
+    public void setRentEndDate(Date rentEndDate) {
+        this.rentEndDate = rentEndDate;
     }
 
     @Override
     public String toString() {
         return "Rent{" +
                 "id=" + id +
-                ", rent_user_id=" + rent_user_id +
-                ", rent_car_id=" + rent_car_id +
-                ", rent_start_date=" + rent_start_date +
-                ", rent_end_date=" + rent_end_date +
+                ", rentUserId=" + rentUserId +
+                ", rentCarId=" + rentCarId +
+                ", rentStartDate=" + rentStartDate +
+                ", rentEndDate=" + rentEndDate +
                 '}';
     }
 }

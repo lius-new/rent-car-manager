@@ -9,11 +9,13 @@ public interface UserService {
 
     int updateUser(User user);
 
-    User deleteUserById(int id);
+    int  deleteUserByUserName(String userName);
 
     List<User> selectAllUser();
 
     User selectUserByUserName(String username);
+
+    User selectIdByUserName(String username);
 
     List<User>  selectUserByUserNameLike(String username);
 

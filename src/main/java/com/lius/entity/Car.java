@@ -10,6 +10,10 @@ public class Car {
 
     private Integer rentId;
 
+    private User user;
+    private Rent rent;
+
+
     public Integer getId() {
         return id;
     }
@@ -64,5 +68,36 @@ public class Car {
 
     public void setRentId(Integer rentId) {
         this.rentId = rentId;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Rent getRent() {
+        return rent;
+    }
+
+    public void setRent(Rent rent) {
+        this.rent = rent;
+    }
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "id=" + id +
+                ", carName='" + carName + '\'' +
+                ", carUserId='" + carUserId + '\'' +
+                ", carDesc='" + carDesc + '\'' +
+                ", carContent='" + carContent + '\'' +
+                ", carStatus=" + carStatus +
+                ", rentId=" + rentId +
+                ", user=" + user +
+                ", rent=" + rent +
+                '}';
     }
 }

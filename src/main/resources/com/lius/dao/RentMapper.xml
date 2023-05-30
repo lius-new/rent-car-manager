@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lius.dao.RentMapper">
+    <resultMap id="Rent" type="com.lius.entity.Car">
+        <id property="id" column="rid"/>
+        <result property="carName" column="car_name"/>
+        <collection property="user" ofType="com.lius.entity.User">
+            <result property="userName" column="user_name"/>
+        </collection>
+        <collection property="rent" ofType="com.lius.entity.Rent">
+            <id property="id" column="rid"/>
+            <result property="rentStartDate" column="rent_start_date"/>
+            <result property="rentEndDate" column="rent_end_date"/>
+        </collection>
+    </resultMap>
+</mapper>

@@ -1,10 +1,6 @@
 package com.lius.service;
 
 import com.lius.entity.Car;
-import com.lius.entity.CarShow;
-import com.lius.entity.Temp;
-import com.lius.entity.User;
-import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -14,14 +10,20 @@ public interface CarService {
 
     int updateCar(Car car);
 
-    int deleteCarById(int id);
+    int updateCarAll(Car car);
 
-    List<CarShow> selectAllCar();
+    int deleteCarById(String id);
 
-    List<CarShow> selectCarByUser(String userName);
+    List<Car> selectAllCar();
+
+
+    List<Car> selectRentCar();
+
+    List<Car> selectAllCarAndUserAndRent();
+
+    List<Car> selectCarByUser(String userName);
 
     Car selectCarByCarName(String carName);
 
-
-    List<Temp> selectAllCarV2();
+    int updateCarRentId(Integer rentId,Integer id);
 }

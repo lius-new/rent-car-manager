@@ -4,6 +4,7 @@ import com.lius.common.Result;
 import com.lius.common.ResultCode;
 import com.lius.common.Utils;
 import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.JwtException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -54,4 +55,11 @@ public class ExceptionAdvice {
             return new Result<>(false, ResultCode.CHECK_TOKEN_FAIL.getCode(), exception.getMessage());
         }
     }
+
+    @ExceptionHandler(JwtException.class) // token为空错误
+    public Result<Object> doTokenExpired(JwtException exception) {
+        return new Result<>(false, ResultCode.CHECK_TOKEN_ERROR.getCode(), ResultCode.CHECK_TOKEN_ERROR.getMsg());
+    }
+
+
 }
