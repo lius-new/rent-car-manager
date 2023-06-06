@@ -37,7 +37,7 @@ public interface CarMapper {
     List<Car> selectCarByUser(@Param("userName") String userName);
 
 
-    @Select("SELECT car.id,user.id as uid,user_name,car.rent_id, car.car_name, car.car_desc, rent.id as rid,rent_start_date,rent_end_date FROM `car-rent`.car INNER JOIN user ON car.car_user_id = user.id LEFT JOIN rent ON car.rent_id = rent.id;")
+    @Select("SELECT car.id,user.id as uid,user_name,car.rent_id, car.car_name, car.car_desc, rent.id as rid,rent_start_date,rent_end_date FROM `car-rent`.car INNER JOIN user ON car.car_user_id = user.id LEFT JOIN rent ON car.rent_id = rent.id where car_status=0;")
     @ResultMap("CarAndUserAndRent")
     List<Car> selectAllCarAndUserAndRent();
 

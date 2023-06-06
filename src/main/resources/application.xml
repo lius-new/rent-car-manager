@@ -32,6 +32,7 @@
             <mvc:mapping path="/**"/>
             <!--不需要被拦截的路径-->
             <mvc:exclude-mapping path="/user/login"/><!--在拦截器内部做了处理-->
+            <mvc:exclude-mapping path="/user/register"/><!--在拦截器内部做了处理-->
             <mvc:exclude-mapping path="/user/authLogin"/><!--在拦截器内部做了处理-->
             <!--指定拦截器-->
             <bean class="com.lius.interceptors.AuthInterceptors"/>
