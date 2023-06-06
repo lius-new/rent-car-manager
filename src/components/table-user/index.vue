@@ -56,7 +56,7 @@ const loadData = async () => {
 
     // 添加操作按钮
     columns.value.push({
-      title: "action",
+      title: "操作",
       key: "action",
       render(row: any) {
         return h(

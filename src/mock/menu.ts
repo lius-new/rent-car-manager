@@ -9,6 +9,7 @@ import {
   LogInOutline,
   HomeOutline,
   CartSharp,
+  Diamond,
 } from "@vicons/ionicons5";
 
 interface MenuItemInterface {
@@ -60,5 +61,10 @@ const userOptions: MenuItemInterface[] = [
     icon: renderIcon(CartSharp),
   },
 ];
+const toVipOptions: MenuItemInterface = {
+  label: "升级VIP",
+  key: "to-vip",
+  icon: renderIcon(Diamond),
+};
 
-export default { menuOptions, userOptions };
+export default { menuOptions, userOptions, toVipOptions };

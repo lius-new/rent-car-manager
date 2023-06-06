@@ -46,6 +46,7 @@ export const mapUserKey = (key: string) => {
     userEmail: "用户邮箱",
     userRole: "用户权限",
     userStatus: "用户状态",
+    balance: "用户余额",
   }[key];
 };
 export const mapCarKey = (key: string) => {

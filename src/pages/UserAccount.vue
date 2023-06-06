@@ -26,6 +26,15 @@
         />
       </div>
       <div>
+        <span>金额</span>
+        <n-input
+          disabled
+          type="text"
+          :value="userAccountInfo.balance"
+          @input="(value:string)=>userAccountInfo.balance = value"
+        />
+      </div>
+      <div>
         <span>用户权限</span>
         <n-select
           type="text"
@@ -71,19 +80,28 @@ const userAccountInfo = reactive({
   userEmail: ref(""),
   userRole: ref(""),
   userStatus: ref<"0" | "1">(),
+  balance: ref<any>(),
 });
 
 onBeforeMount(async () => {
   let resp = await getUserByName(localStorage.getItem("userName") as string);
 
-  const { id, userName, userPassword, userEmail, userRole, userStatus } =
-    await resp.data.data;
+  const {
+    id,
+    userName,
+    userPassword,
+    userEmail,
+    userRole,
+    userStatus,
+    balance,
+  } = await resp.data.data;
   userAccountInfo.id = id;
   userAccountInfo.userName = userName;
   userAccountInfo.userPassword = userPassword;
   userAccountInfo.userEmail = userEmail;
   userAccountInfo.userRole = userRole;
   userAccountInfo.userStatus = userStatus;
+  userAccountInfo.balance = balance;
 });
 
 const clickHandle = async () => {

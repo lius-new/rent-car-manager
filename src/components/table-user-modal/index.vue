@@ -59,6 +59,14 @@
           :options="optionUserStatus"
         />
       </div>
+      <div>
+        <span>用户余额</span>
+        <n-input-number
+          :status="(modelProps.type as any)"
+          :value="userInfo.balance"
+          @update:value="(value:any) => userInfo.balance = value"
+        />
+      </div>
     </div>
     <div v-else-if="store.modalStore.type === 'add'" class="add-modal-wrapper">
       <div>
@@ -111,7 +119,7 @@
 </template>
 <script setup lang="ts">
 import { useTableOperateModel } from "@/stores/index";
-import { useMessage, NModal, NInput, NSelect } from "naive-ui";
+import { useMessage, NModal, NInput, NSelect, NInputNumber } from "naive-ui";
 import { optionUserRole, optionUserStatus } from "@/mock/common";
 import { renderIcon } from "@/utils";
 import { computed, reactive, ref } from "vue";
@@ -132,6 +140,7 @@ const userInfo = reactive({
   userEmail: ref(store.modalStore.data.userEmail),
   userRole: ref(store.modalStore.data.userRole),
   userStatus: ref(store.modalStore.data.userStatus),
+  balance: ref(store.modalStore.data.balance),
 });
 
 const modelProps = computed(() => {
@@ -171,6 +180,8 @@ const editProps = {
   positiveText: "提交",
   negativeText: "取消",
   modelButtonOKClick: async () => {
+    console.log(userInfo);
+
     const resp = await changeUserInfo(userInfo);
     if (resp.data && resp.data.code === 1102) message.success("修改成功");
     else message.warning("修改失败");

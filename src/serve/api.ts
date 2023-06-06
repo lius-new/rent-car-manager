@@ -42,6 +42,13 @@ export const changeUserInfo = async (user: any) => {
     data: JSON.parse(JSON.stringify(user)),
   });
 };
+export const toVip = async (user: any) => {
+  return await httpPut({
+    url: "/user/to-vip",
+    data: JSON.parse(JSON.stringify(user)),
+  });
+};
+
 
 export const getAllCar = async () => {
   return await httpGet({ url: "/car" });
