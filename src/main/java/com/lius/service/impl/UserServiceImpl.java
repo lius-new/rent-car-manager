@@ -71,4 +71,9 @@ public class UserServiceImpl implements UserService {
     public int changeUserRole(User user) {
         return userMapper.changeUserRole(user);
     }
+
+    @Override
+    public int toVip(User user) {
+        return userMapper.toVip(user);
+    }
 }

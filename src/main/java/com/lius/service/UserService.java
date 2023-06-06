@@ -27,4 +27,5 @@ public interface UserService {
 
     int changeUserRole(User user);
 
+    int toVip(User user);
 }

@@ -7,6 +7,7 @@ public class User {
     private String userEmail;
     private String userRole;
     private Integer userStatus;
+    private Double balance;
 
     public User() {
     }
@@ -66,9 +67,16 @@ public class User {
         this.userStatus = userStatus;
     }
 
+    public Double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Double balance) {
+        this.balance = balance;
+    }
+
     @Override
-    public String
-    toString() {
+    public String toString() {
         return "User{" +
                 "id=" + id +
                 ", userName='" + userName + '\'' +
@@ -76,6 +84,7 @@ public class User {
                 ", userEmail='" + userEmail + '\'' +
                 ", userRole='" + userRole + '\'' +
                 ", userStatus=" + userStatus +
+                ", balance=" + balance +
                 '}';
     }
 }

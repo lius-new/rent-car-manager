@@ -6,7 +6,7 @@
         <BKV>
           <option name="enabled" value="true" />
           <option name="key" value="Authorization" />
-          <option name="value" value="eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI0Iiwic3ViIjoiYWRtaW4iLCJpYXQiOjE2ODU0MzM4MTIsImV4cCI6MTY4NTUyMDIxMiwicm9sZSI6IkFETUlOIn0._btYo7hksCdDJJlARaeOScgqT4F-y05PAzmPniddmBM" />
+          <option name="value" value="eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI0Iiwic3ViIjoiYWRtaW4iLCJpYXQiOjE2ODYwMjg4MTAsImV4cCI6MTY4NjExNTIxMCwicm9sZSI6IkFETUlOIn0.i59nXrMyPksDB9X83PpSwKZz2yDkPYof3pthY3WDZZ8" />
         </BKV>
       </list>
     </option>
