@@ -1,6 +1,6 @@
 # 租车系统
 
-本项目于课程结束后完成的。技术栈采用的是前后端分离的形式。后端采用基础的ssm(spring+mybatis+spring-mvc)配合jwt做权限的认证和校验,h 前端的内容放在[front分支]()
+本项目于课程结束后完成的。技术栈采用的是前后端分离的形式。后端采用基础的ssm(spring+mybatis+spring-mvc)配合jwt做权限的认证和校验,前端的内容放在[front分支](https://github.com/lius-new/rent-car-manager/tree/front)
 
 ### 目录结构
 ```
