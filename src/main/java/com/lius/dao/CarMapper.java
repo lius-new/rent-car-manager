@@ -22,9 +22,6 @@ public interface CarMapper {
     @Delete("delete from car where id=#{id}")
     int deleteCarById(String id);
 
-    @Delete("delete from car where car_user_id=#{id}")
-    int deleteCarByUserId(String id);
-
     @Select("SELECT car.id as id, car.car_name as carName, car.car_desc as carDesc,car.car_status as carStatus , car.rent_id as rentId,user.id as uid, user.user_name as userName, rent.id as rid,rent_start_date,rent_end_date\n" +
             "    FROM `car-rent`.car\n" +
             "    INNER JOIN user ON car.car_user_id = user.id\n" +
@@ -48,4 +45,6 @@ public interface CarMapper {
     @ResultMap("rentCar")
     List<Car> selectRentCar();
 
+    @Select("select * from car where car_user_id=#{uId}")
+    Car selectCarByUserName(int uId);
 }

@@ -52,8 +52,18 @@ public class RentServiceImpl implements RentService {
     }
 
     @Override
-    public Integer deleteRentByUserId(String uId) {
+    public int deleteRentByUserId(String uId) {
         return rentMapper.deleteRentByUserId(uId);
+    }
+
+    @Override
+    public int deleteRentById(Integer rentId) {
+        return rentMapper.deleteRentById(rentId);
+    }
+
+    @Override
+    public int deleteByRentCarId(Integer id) {
+        return rentMapper.deleteByRentCarId(id);
     }
 
 }

@@ -34,4 +34,10 @@ public interface RentMapper {
 
     @Delete("delete from rent where rent_user_id=#{uid}")
     Integer deleteRentByUserId(String uId);
+
+    @Delete("delete from rent where id=#{rentId}")
+    int deleteRentById(Integer rentId);
+
+    @Delete("delete from rent where rent_car_id=#{id}")
+    int deleteByRentCarId(Integer id);
 }

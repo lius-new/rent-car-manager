@@ -23,5 +23,9 @@ public interface RentService {
 
     Integer deleteRent(String userName, String cId);
 
-    Integer deleteRentByUserId(String uId);
+    int deleteRentByUserId(String uId);
+
+    int deleteRentById(Integer rentId);
+
+    int deleteByRentCarId(Integer id);
 }

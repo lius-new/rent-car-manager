@@ -14,8 +14,6 @@ public interface CarService {
 
     int deleteCarById(String id);
 
-    int deleteCarByUserId(String id);
-
     List<Car> selectAllCar();
 
 
@@ -27,5 +25,7 @@ public interface CarService {
 
     Car selectCarByCarName(String carName);
 
-    int updateCarRentId(Integer rentId,Integer id);
+    int updateCarRentId(Integer rentId, Integer id);
+
+    Car selectCarByUserName(int uId);
 }

@@ -3,6 +3,7 @@ package com.lius.controller;
 import com.lius.common.Result;
 import com.lius.common.ResultCode;
 import com.lius.common.Utils;
+import com.lius.entity.Car;
 import com.lius.entity.User;
 import com.lius.service.CarService;
 import com.lius.service.RentService;
@@ -62,8 +63,17 @@ public class UserController {
         if (user == null)
             return new Result<>(true, ResultCode.DATABASE_OPERATE_FAIL.getCode(), ResultCode.DATABASE_OPERATE_FAIL.getMsg());
 
-        Integer rentDeleteCount = rentService.deleteRentByUserId(user.getId().toString());
-        Integer carDeleteCount = carService.deleteCarByUserId(user.getId().toString());
+        Car car = carService.selectCarByUserName(user.getId());
+        if (car != null) {
+            if (car.getRentId() == null) {
+                int rentDeleteCount = rentService.deleteRentById(car.getRentId());
+                int i = rentService.deleteByRentCarId(car.getId());
+                int carDeleteCount = carService.deleteCarById(car.getId().toString());
+            } else {
+                return new Result<>(true, ResultCode.DATABASE_OPERATE_FAIL.getCode(), "车辆租借中，无法删除用户");
+            }
+        }
+
         int userDeleteCount = userService.deleteUserByUserName(userName);
 
         if (userDeleteCount > 0) {
