@@ -35,4 +35,6 @@ git clone https://github.com/lius-new/rent-car-manager.git
 3. 刷新maven,并运行tomcat
 ![](https://s2.loli.net/2023/06/26/QW6gZDyJo5wtq14.png)
 
+### 部分功能预览
+![]()
 **这只是后端部分,需要拉取前端的内容一同运行**
