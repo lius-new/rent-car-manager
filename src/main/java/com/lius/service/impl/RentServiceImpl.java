@@ -50,4 +50,10 @@ public class RentServiceImpl implements RentService {
     public Integer deleteRent(String userName, String cId) {
         return rentMapper.deleteRent(userName, cId);
     }
+
+    @Override
+    public Integer deleteRentByUserId(String uId) {
+        return rentMapper.deleteRentByUserId(uId);
+    }
+
 }

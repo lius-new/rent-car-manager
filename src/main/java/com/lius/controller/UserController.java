@@ -4,6 +4,8 @@ import com.lius.common.Result;
 import com.lius.common.ResultCode;
 import com.lius.common.Utils;
 import com.lius.entity.User;
+import com.lius.service.CarService;
+import com.lius.service.RentService;
 import com.lius.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +20,12 @@ import java.util.Map;
 public class UserController {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private CarService carService;
+
+    @Autowired
+    private RentService rentService;
 
     @PostMapping()
     public Result<Object> insertUser(@RequestBody User user) {
@@ -49,8 +57,16 @@ public class UserController {
 
     @DeleteMapping("/{userName}")
     public Result<Object> deleteUser(@PathVariable(value = "userName", required = true) String userName) {
-        int i = userService.deleteUserByUserName(userName);
-        if (i > 0) {
+        User user = userService.selectUserByUserName(userName);
+
+        if (user == null)
+            return new Result<>(true, ResultCode.DATABASE_OPERATE_FAIL.getCode(), ResultCode.DATABASE_OPERATE_FAIL.getMsg());
+
+        Integer rentDeleteCount = rentService.deleteRentByUserId(user.getId().toString());
+        Integer carDeleteCount = carService.deleteCarByUserId(user.getId().toString());
+        int userDeleteCount = userService.deleteUserByUserName(userName);
+
+        if (userDeleteCount > 0) {
             return new Result<>(true, ResultCode.DATABASE_OPERATE_SUCCESS.getCode(), ResultCode.DATABASE_OPERATE_SUCCESS.getMsg());
         }
         return new Result<>(false, ResultCode.DATABASE_OPERATE_FAIL.getCode(), ResultCode.DATABASE_OPERATE_FAIL.getMsg());

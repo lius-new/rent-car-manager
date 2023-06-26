@@ -35,6 +35,12 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
+    public int deleteCarByUserId(String id) {
+        return carMapper.deleteCarByUserId(id);
+    }
+
+
+    @Override
     public List<Car> selectAllCar() {
         return carMapper.selectAllCar();
     }

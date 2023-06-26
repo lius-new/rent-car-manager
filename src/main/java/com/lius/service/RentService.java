@@ -22,4 +22,6 @@ public interface RentService {
     Rent selectCurrentRent(Integer rentUserId,Integer rentCarId);
 
     Integer deleteRent(String userName, String cId);
+
+    Integer deleteRentByUserId(String uId);
 }

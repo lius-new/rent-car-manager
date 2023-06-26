@@ -16,8 +16,7 @@ public interface RentMapper {
     @Update("update rent set rent_user_id=#{rentUserId} ,rent_start_date=#{rentStartDate},rent_end_date=#{rentEndDate}  where id=#{rentId}")
     Integer updateRent( @Param("rentId") Integer rentId,@Param("rentUserId") Integer rentUserId, @Param("rentStartDate") Date rentStartDate, @Param("rentEndDate") Date rentEndDate);
 
-    @Select("select rent.id as rid,user_name,car_name,rent_start_date,rent_end_date from rent,user,car where rent_car_id = car.id and rent.rent_user_id = user.id;")
-    @ResultMap("Rent")
+    @Select("select rent.id as rid,user_name,car_name,rent_start_date,rent_end_date from rent,user,car where rent_car_id = car.id and rent.rent_user_id = user.id;") @ResultMap("Rent")
     List<Car> selectAllRent();
 
     @Insert("insert into rent(rent_user_id, rent_car_id, rent_start_date, rent_end_date) values (#{rentUserId},#{rentCarId},#{rentStartDate},#{rentEndDate});")
@@ -33,4 +32,6 @@ public interface RentMapper {
     @Delete("delete rent from rent left join car c on c.rent_id = rent.id where c.rent_id is null and rent_car_id = #{cId};")
     Integer deleteRent(@Param("userName") String userName, @Param("cId") String cId);
 
+    @Delete("delete from rent where rent_user_id=#{uid}")
+    Integer deleteRentByUserId(String uId);
 }
