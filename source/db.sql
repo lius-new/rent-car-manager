@@ -20,8 +20,8 @@
 --
 
 DROP DATABASE IF EXISTS 'car-rent';
-CREATE DATABASE car-rent;
-USE car-rent;
+CREATE DATABASE `car-rent`;
+USE `car-rent`;
 
 DROP TABLE IF EXISTS `car`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
